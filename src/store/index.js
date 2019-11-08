@@ -32,7 +32,7 @@ export default new Vuex.Store({
           commit('updatePokemon', response.data)
           commit('updatePokemonImageUrl', 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + response.data.id).substr(-3) + '.png')
         })
-      axios.get('https://pokeapi.co/api/v2/pokemon-species/' + payload.name)
+      axios.get('https://pokeapi.co/api/v2/pokemon-species/' + payload.name.toLowerCase())
         .then(response => {
           let description = ''
           response.data.flavor_text_entries.forEach(flavorTextEntry => {

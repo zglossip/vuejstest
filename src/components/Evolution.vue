@@ -1,6 +1,6 @@
 <template>
   <div class="col">
-    <b-img :src="spriteUrl" />
+    <sprite-image :sprite-url="spriteUrl" :name="chain.species.name" :show-arrow="chain.evolution_details.length > 0"/>
     <div class="row">
       <evolution v-for="nextEvolution in chain.evolves_to" v-bind:chain="nextEvolution"></evolution>
     </div>
@@ -9,8 +9,10 @@
 
 <script>
   import axios from 'axios'
+  import SpriteImage from "./SpriteImage.vue";
 
   export default {
+    components: {SpriteImage},
     name: 'evolution',
     props: {
       chain: {
