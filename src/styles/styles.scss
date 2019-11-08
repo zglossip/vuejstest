@@ -1,1 +1,26 @@
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+$typeColors: (
+        'normal': 'beige',
+        'fighting': 'red',
+        'flying': 'cornflowerblue',
+        'poison': 'purple',
+        'ground': 'tan',
+        'rock': 'saddlebrown',
+        'bug': 'olivedrab',
+        'ghost': 'indigo',
+        'steel': 'lightsteelblue',
+        'fire': 'orange',
+        'water': 'blue',
+        'grass': 'green',
+        'electric': 'yellow',
+        'psychic': 'deeppink',
+        'ice': 'powderblue',
+        'dragon': 'slategrey',
+        'dark': 'dimgrey',
+        'fairy': 'pink'
+);
+
+@each $type, $color in $typeColors {
+  .tb-#{$type} {
+    background-color: #{$color};
+  }
+}

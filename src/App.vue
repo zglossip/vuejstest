@@ -22,12 +22,6 @@
         ></b-pagination>
       </div>
       <div class="col-4">
-        <div class="row">
-          <b-nav>
-            <b-nav-item active to="pokemon">Pokemon</b-nav-item>
-            <b-nav-item to="evolution">Evolution</b-nav-item>
-          </b-nav>
-        </div>
         <router-view></router-view>
       </div>
     </div>
