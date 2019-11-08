@@ -2,11 +2,17 @@
   <div class="container">
     <div class="row">
       <div class="col"></div>
-      <div class="col-6">
-        <router-view></router-view>
-        <b-form-select v-on:change="updatePokemonId($event)">
-          <option v-for="pokemon in pokemonList" :value="pokemon.id">{{pokemon.name.english}}</option>
+      <div class="col-4">
+        <b-form-select class="mb-1" v-on:change="updatePokemonId($event)">
+          <option v-for="pokemon in pokemonList" :value="pokemon">{{pokemon.name}}</option>
         </b-form-select>
+        <div class="row">
+          <b-nav>
+            <b-nav-item active to="pokemon">Pokemon</b-nav-item>
+            <b-nav-item to="evolution">Evolution</b-nav-item>
+          </b-nav>
+        </div>
+        <router-view></router-view>
       </div>
       <div class="col"></div>
     </div>
@@ -14,10 +20,11 @@
 </template>
 <script>
 import axios from 'axios'
+import {ALL_POKEMON_URL} from "./util/PokeAPIConstants";
 export default {
   methods: {
-    updatePokemonId: function(pokemonId){
-      this.$store.dispatch('updatePokemon', pokemonId)
+    updatePokemonId: function(pokemon){
+      this.$store.dispatch('updatePokemon', pokemon)
       this.$router.push('/pokemon')
     }
   },
@@ -29,8 +36,8 @@ export default {
   },
   mounted() {
     axios
-      .get('https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/pokedex.json')
-      .then(response => this.pokemonList = response.data)
+      .get(ALL_POKEMON_URL)
+      .then(response => this.pokemonList = response.data.results)
   }
 }
 </script>

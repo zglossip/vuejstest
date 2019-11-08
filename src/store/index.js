@@ -6,21 +6,33 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    pokemonId: null,
-    pokemonDescription: ""
+    pokemon: null,
+    pokemonDescription: "",
+    pokemonEvolutionChain: null,
+    pokemonImageUrl: ""
   },
   mutations: {
-    updatePokemonId (state, pokemonId) {
-      state.pokemonId = pokemonId
+    updatePokemon (state, pokemon) {
+      state.pokemon = pokemon
     },
     updatePokemonDescription (state, pokemonDescription) {
       state.pokemonDescription = pokemonDescription
+    },
+    updatePokemonEvolutionChain (state, pokemonEvolutionChain) {
+      state.pokemonEvolutionChain = pokemonEvolutionChain
+    },
+    updatePokemonImageUrl (state, pokemonImageUrl) {
+      state.pokemonImageUrl = pokemonImageUrl
     }
   },
   actions: {
-    updatePokemon({ commit }, pokemonId) {
-      commit('updatePokemonId', pokemonId)
-      axios.get('https://pokeapi.co/api/v2/pokemon-species/' + pokemonId)
+    updatePokemon({ commit }, payload) {
+      axios.get(payload.url)
+        .then(response => {
+          commit('updatePokemon', response.data)
+          commit('updatePokemonImageUrl', 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + response.data.id).substr(-3) + '.png')
+        })
+      axios.get('https://pokeapi.co/api/v2/pokemon-species/' + payload.name)
         .then(response => {
           let description = ''
           response.data.flavor_text_entries.forEach(flavorTextEntry => {
@@ -29,6 +41,8 @@ export default new Vuex.Store({
             }
           })
           commit('updatePokemonDescription', description)
+          axios.get(response.data.evolution_chain.url)
+            .then(evolutionChainResponse => commit('updatePokemonEvolutionChain', evolutionChainResponse.data.chain))
         })
     }
   }
