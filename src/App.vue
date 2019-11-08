@@ -3,11 +3,10 @@
     <div class="row">
       <div class="col"></div>
       <div class="col-6">
-        <ul>
-          <li v-for="pokemon in pokemonList">
-            <basic v-bind:pokemon-id="pokemon.id"></basic>
-          </li>
-        </ul>
+        <router-view></router-view>
+        <b-form-select v-on:change="updatePokemonId($event)">
+          <option v-for="pokemon in pokemonList" :value="pokemon.id">{{pokemon.name.english}}</option>
+        </b-form-select>
       </div>
       <div class="col"></div>
     </div>
@@ -15,10 +14,12 @@
 </template>
 <script>
 import axios from 'axios'
-import Basic from "./components/Basic.vue";
 export default {
-  components: {
-    Basic
+  methods: {
+    updatePokemonId: function(pokemonId){
+      this.$store.dispatch('updatePokemon', pokemonId)
+      this.$router.push('/pokemon')
+    }
   },
   data() {
     return{

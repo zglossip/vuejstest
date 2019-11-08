@@ -1,40 +1,33 @@
 <template>
   <div>
     <div class="row">
-      <b-img-lazy class="col" :src="imageUrl"></b-img-lazy>
+      <b-img class="col" :src="imageUrl" alt="Image not found"></b-img>
     </div>
     <div class="row">
-      {{description}}
+      <span class="col">
+        {{$store.state.pokemonDescription}}
+      </span>
     </div>
+    <router-tabs active="POKEMON"></router-tabs>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import RouterTabs from "./RouterTabs.vue";
 
 export default {
-  props: {
-    pokemonId: {
-      type: Number,
-      required: true
+  components: {
+    RouterTabs
+  },
+  computed: {
+    imageUrl: function(){
+      return 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + this.$store.state.pokemonId).substr(-3) + '.png'
     }
   },
   data() {
     return {
-      imageUrl: "",
-      description: ""
+      description: ''
     }
-  },
-  mounted() {
-    this.imageUrl = 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + this.pokemonId).substr(-3) + '.png'
-    axios.get('https://pokeapi.co/api/v2/pokemon-species/' + this.pokemonId)
-      .then(response => {
-        response.data.flavor_text_entries.forEach(flavorTextEntry => {
-          if(flavorTextEntry.language.name == 'en'){
-            this.description = flavorTextEntry.flavor_text
-          }
-        })
-      })
   }
 }
 </script>
