@@ -1,14 +1,21 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <evolution v-bind:chain="this.$store.state.pokemonEvolutionChain"></evolution>
+  <div>
+    <router-tabs active="EVOLUTION"></router-tabs>
+    <div class="">
+      <div class="card" style="width: 100%;">
+        <h5 class="card-title">Evolution Chart</h5>
+        <div class="card-body">
+          <evolution v-bind:chain="this.$store.state.pokemonEvolutionChain"></evolution>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Evolution from "./Evolution.vue";
+import RouterTabs from "./RouterTabs.vue";
 export default {
-  components: {Evolution}
+  components: {Evolution, RouterTabs}
 }
 </script>
