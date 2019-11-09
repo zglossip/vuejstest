@@ -7,9 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     pokemon: null,
-    pokemonDescription: "",
+    pokemonDescription: '',
     pokemonEvolutionChain: null,
-    pokemonImageUrl: ""
+    pokemonImageUrl: ''
   },
   mutations: {
     updatePokemon (state, pokemon) {
@@ -26,7 +26,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    updatePokemon({ commit }, payload) {
+    updatePokemon ({ commit }, payload) {
       axios.get(payload.url)
         .then(response => {
           commit('updatePokemon', response.data)
@@ -36,7 +36,7 @@ export default new Vuex.Store({
         .then(response => {
           let description = ''
           response.data.flavor_text_entries.forEach(flavorTextEntry => {
-            if(flavorTextEntry.language.name == 'en' && description === ''){
+            if (flavorTextEntry.language.name === 'en' && description === '') {
               description = flavorTextEntry.flavor_text
             }
           })
