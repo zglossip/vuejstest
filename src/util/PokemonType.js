@@ -1,54 +1,54 @@
 export class PokemonType {
   constructor (offense, defense) {
     this.offense = {
-      normal: offense.normal ? offense.normal : 1,
-      fighting: offense.fighting ? offense.fighting : 1,
-      flying: offense.flying ? offense.flying : 1,
-      poison: offense.poison ? offense.poison : 1,
-      ground: offense.ground ? offense.ground : 1,
-      rock: offense.rock ? offense.rock : 1,
-      bug: offense.bug ? offense.bug : 1,
-      ghost: offense.ghost ? offense.ghost : 1,
-      steel: offense.steel ? offense.steel : 1,
-      fire: offense.fire ? offense.fire : 1,
-      water: offense.water ? offense.water : 1,
-      grass: offense.grass ? offense.grass : 1,
-      electric: offense.electric ? offense.electric : 1,
-      psychic: offense.psychic ? offense.psychic : 1,
-      ice: offense.ice ? offense.ice : 1,
-      dragon: offense.dragon ? offense.dragon : 1,
-      dark: offense.dark ? offense.dark : 1,
-      fairy: offense.fairy ? offense.fairy : 1
+      normal: offense.normal === undefined ? 1: offense.normal,
+      fighting: offense.fighting === undefined ? 1 : offense.fighting,
+      flying: offense.flying === undefined ? 1 : offense.flying,
+      poison: offense.poison === undefined  ? 1 : offense.poison,
+      ground: offense.ground === undefined  ? 1 : offense.ground,
+      rock: offense.rock === undefined  ? 1 : offense.rock,
+      bug: offense.bug === undefined  ? 1 : offense.bug,
+      ghost: offense.ghost === undefined  ? 1 : offense.ghost,
+      steel: offense.steel === undefined  ? 1 : offense.steel,
+      fire: offense.fire === undefined  ? 1 : offense.fire,
+      water: offense.water === undefined  ? 1 : offense.water,
+      grass: offense.grass === undefined  ? 1 : offense.grass,
+      electric: offense.electric === undefined  ? 1 : offense.electric,
+      psychic: offense.psychic === undefined  ? 1 : offense.psychic,
+      ice: offense.ice === undefined  ? 1 : offense.ice,
+      dragon: offense.dragon === undefined  ? 1 : offense.dragon,
+      dark: offense.dark === undefined  ? 1 : offense.dark,
+      fairy: offense.fairy === undefined  ? 1 : offense.fairy
     }
 
     this.defense = {
-      normal: defense.normal ? defense.normal : 1,
-      fighting: defense.fighting ? defense.fighting : 1,
-      flying: defense.flying ? defense.flying : 1,
-      poison: defense.poison ? defense.poison : 1,
-      ground: defense.ground ? defense.ground : 1,
-      rock: defense.rock ? defense.rock : 1,
-      bug: defense.bug ? defense.bug : 1,
-      ghost: defense.ghost ? defense.ghost : 1,
-      steel: defense.steel ? defense.steel : 1,
-      fire: defense.fire ? defense.fire : 1,
-      water: defense.water ? defense.water : 1,
-      grass: defense.grass ? defense.grass : 1,
-      electric: defense.electric ? defense.electric : 1,
-      psychic: defense.psychic ? defense.psychic : 1,
-      ice: defense.ice ? defense.ice : 1,
-      dragon: defense.dragon ? defense.dragon : 1,
-      dark: defense.dark ? defense.dark : 1,
-      fairy: defense.fairy ? defense.fairy : 1
+      normal: defense.normal === undefined ? 1: defense.normal,
+      fighting: defense.fighting === undefined ? 1 : defense.fighting,
+      flying: defense.flying === undefined ? 1 : defense.flying,
+      poison: defense.poison === undefined  ? 1 : defense.poison,
+      ground: defense.ground === undefined  ? 1 : defense.ground,
+      rock: defense.rock === undefined  ? 1 : defense.rock,
+      bug: defense.bug === undefined  ? 1 : defense.bug,
+      ghost: defense.ghost === undefined  ? 1 : defense.ghost,
+      steel: defense.steel === undefined  ? 1 : defense.steel,
+      fire: defense.fire === undefined  ? 1 : defense.fire,
+      water: defense.water === undefined  ? 1 : defense.water,
+      grass: defense.grass === undefined  ? 1 : defense.grass,
+      electric: defense.electric === undefined  ? 1 : defense.electric,
+      psychic: defense.psychic === undefined  ? 1 : defense.psychic,
+      ice: defense.ice === undefined  ? 1 : defense.ice,
+      dragon: defense.dragon === undefined  ? 1 : defense.dragon,
+      dark: defense.dark === undefined  ? 1 : defense.dark,
+      fairy: defense.fairy === undefined  ? 1 : defense.fairy
     }
   }
 
   multiply (type) {
-    type.offense.forEach((value, key) => {
-      this.offense[key] *= value
+    Object.keys(type.offense).map(key => {
+      this.offense[key] *=type.offense[key]
     })
-    type.defense.forEach((value, key) => {
-      this.defense[key] *= value
+    Object.keys(type.offense).map(key => {
+      this.defense[key] *=type.defense[key]
     })
   }
 }
