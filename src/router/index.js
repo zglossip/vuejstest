@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import None from '../components/None.vue'
 import Basic from '../components/Basic.vue'
 import EvolutionChain from '../components/EvolutionChain.vue'
+import TypeEffectiveness from "../components/TypeEffectiveness.vue";
 
 Vue.use(Router)
 
@@ -20,6 +21,10 @@ export default new Router({
       path: '/evolution',
       name: 'EvolutionChain',
       component: EvolutionChain
+    }, {
+      path: '/typeEffectiveness',
+      name: 'TypeEffectiveness',
+      component: TypeEffectiveness
     }
   ]
 })

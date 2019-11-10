@@ -13,6 +13,12 @@
       >
         Evolution
       </b-nav-item>
+      <b-nav-item
+          :active="active === 'TYPE_EFFECTIVENESS'"
+          to="typeEffectiveness"
+      >
+        Type Effectiveness
+      </b-nav-item>
     </b-nav>
   </div>
 </template>

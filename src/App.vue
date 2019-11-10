@@ -47,7 +47,10 @@ export default {
       .get(ALL_POKEMON_URL)
       .then(response => {
         this.pokemonList = response.data.results.map(pokemon => {
-          pokemon.name = pokemon.name.charAt(0).toUpperCase()
+          return {
+            name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
+            url: pokemon.url
+          }
         })
       })
   },
