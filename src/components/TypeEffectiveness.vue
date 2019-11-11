@@ -41,25 +41,13 @@
       </div>
       <div class="col">
         <ul class="list-group">
-          <li class="list-group-item list-group-item-info">
-            Offense
+          <li class="list-group-item list-group-item-danger">
+            Defense
           </li>
           <li class="list-group-item">
             <h5>
-              <strong>4x:</strong>
-              <type-badge v-for="typeName in fourXTypesDefense" :type-name="typeName"></type-badge>
-            </h5>
-          </li>
-          <li class="list-group-item">
-            <h5>
-              <strong>2x:</strong>
-              <type-badge v-for="typeName in twoXTypesDefense" :type-name="typeName"></type-badge>
-            </h5>
-          </li>
-          <li class="list-group-item">
-            <h5>
-              <strong>1x:</strong>
-              <type-badge v-for="typeName in oneXTypesDefense" :type-name="typeName"></type-badge>
+              <strong>0x:</strong>
+              <type-badge v-for="typeName in zeroXTypesDefense" :type-name="typeName"></type-badge>
             </h5>
           </li>
           <li class="list-group-item">
@@ -70,8 +58,20 @@
           </li>
           <li class="list-group-item">
             <h5>
-              <strong>0x:</strong>
-              <type-badge v-for="typeName in zeroXTypesDefense" :type-name="typeName"></type-badge>
+              <strong>1x:</strong>
+              <type-badge v-for="typeName in oneXTypesDefense" :type-name="typeName"></type-badge>
+            </h5>
+          </li>
+          <li class="list-group-item">
+            <h5>
+              <strong>2x:</strong>
+              <type-badge v-for="typeName in twoXTypesDefense" :type-name="typeName"></type-badge>
+            </h5>
+          </li>
+          <li class="list-group-item">
+            <h5>
+              <strong>4x:</strong>
+              <type-badge v-for="typeName in fourXTypesDefense" :type-name="typeName"></type-badge>
             </h5>
           </li>
         </ul>
@@ -104,9 +104,10 @@ export default {
   mounted() {
     let pokemonType = new PokemonType({}, {})
     this.$store.state.pokemon.types.forEach(type => {
-      pokemonType = pokemonType.multiply(PokemonTypeDefaults[type.type.name])
+      pokemonType.multiply(PokemonTypeDefaults[type.type.name])
     })
-    pokemonType.offense.forEach(key, value => {
+    Object.keys(pokemonType.offense).map(key => {
+      let value = pokemonType.offense[key]
       if(value === 4){
         this.fourXTypesOffense.push(key)
       } else if (value === 2){
@@ -119,7 +120,9 @@ export default {
         this.zeroXTypesOffense.push(key)
       }
     })
-    pokemonType.defense.forEach(key, value => {
+
+    Object.keys(pokemonType.defense).map(key => {
+      let value = pokemonType.defense[key]
       if(value === 4){
         this.fourXTypesDefense.push(key)
       } else if (value === 2){
