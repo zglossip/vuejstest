@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import None from '../components/None.vue'
 import Basic from '../components/Basic.vue'
 import EvolutionChain from '../components/EvolutionChain.vue'
-import TypeEffectiveness from "../components/TypeEffectiveness.vue";
+import TypeEffectiveness from '../components/TypeEffectiveness.vue'
 
 Vue.use(Router)
 
