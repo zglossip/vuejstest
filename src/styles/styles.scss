@@ -19,8 +19,69 @@ $typeColors: (
         'fairy': 'pink'
 );
 
-@each $type, $color in $typeColors {
-  .tb-#{$type} {
-    background-color: #{$color};
+$typeTextColors: (
+        'normal': 'black',
+        'fighting': 'white',
+        'flying': 'black',
+        'poison': 'white',
+        'ground': 'black',
+        'rock': 'white',
+        'bug': 'white',
+        'ghost': 'white',
+        'steel': 'black',
+        'fire': 'black',
+        'water': 'white',
+        'grass': 'white',
+        'electric': 'black',
+        'psychic': 'white',
+        'ice': 'black',
+        'dragon': 'white',
+        'dark': 'white',
+        'fairy': 'black'
+);
+
+/* Wonder if there's a way to combine these two? */
+@mixin tb-background-colors {
+  @each $type, $color in $typeColors {
+    &-#{$type} {
+      background-color: #{$color};
+      margin: 2px;
+    }
   }
 }
+
+@mixin tb-text-colors {
+  @each $type, $textColor in $typeTextColors {
+    &-#{$type} {
+      color: #{$textColor}
+    }
+  }
+}
+
+.tb {
+  @include tb-background-colors;
+  @include tb-text-colors;
+}
+
+.pokemon-container {
+  border-top: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  &.pokemon-container-list {
+    padding: 0 !important;
+  }
+
+  .list-group-item {
+    border-top-right-radius: 0 !important;
+    border-top-left-radius: 0 !important;
+  }
+}
+
+.header-link {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0.5rem;
+  margin-right: 15px;
+  right: 0
+}
+

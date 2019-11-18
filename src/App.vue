@@ -5,11 +5,13 @@
         <b-input
           v-model="filter"
           placeholder="Filter by name..."
+          class="mb-2"
         />
         <b-table
           id="pokemon-table"
           striped
           hover
+          bordered
           :items="pokemonList"
           :fields="fields"
           :per-page="10"

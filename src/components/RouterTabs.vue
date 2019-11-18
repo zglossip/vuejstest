@@ -1,6 +1,10 @@
 <template>
   <div class="row">
-    <b-nav tabs>
+    <b-nav
+      tabs
+      fill
+      class="col-12"
+    >
       <b-nav-item
         :active="active === 'POKEMON'"
         to="pokemon"

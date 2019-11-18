@@ -1,11 +1,8 @@
 <template>
   <div>
     <router-tabs active="EVOLUTION" />
-    <div class="">
-      <div
-        class="card"
-        style="width: 100%;"
-      >
+    <div class="row">
+      <div class="card col-12 pokemon-container">
         <h5 class="card-title">
           Evolution Chart
         </h5>

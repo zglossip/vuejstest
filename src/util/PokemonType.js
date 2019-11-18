@@ -1,26 +1,5 @@
 export class PokemonType {
-  constructor (offense, defense) {
-    this.offense = {
-      normal: offense.normal === undefined ? 1 : offense.normal,
-      fighting: offense.fighting === undefined ? 1 : offense.fighting,
-      flying: offense.flying === undefined ? 1 : offense.flying,
-      poison: offense.poison === undefined ? 1 : offense.poison,
-      ground: offense.ground === undefined ? 1 : offense.ground,
-      rock: offense.rock === undefined ? 1 : offense.rock,
-      bug: offense.bug === undefined ? 1 : offense.bug,
-      ghost: offense.ghost === undefined ? 1 : offense.ghost,
-      steel: offense.steel === undefined ? 1 : offense.steel,
-      fire: offense.fire === undefined ? 1 : offense.fire,
-      water: offense.water === undefined ? 1 : offense.water,
-      grass: offense.grass === undefined ? 1 : offense.grass,
-      electric: offense.electric === undefined ? 1 : offense.electric,
-      psychic: offense.psychic === undefined ? 1 : offense.psychic,
-      ice: offense.ice === undefined ? 1 : offense.ice,
-      dragon: offense.dragon === undefined ? 1 : offense.dragon,
-      dark: offense.dark === undefined ? 1 : offense.dark,
-      fairy: offense.fairy === undefined ? 1 : offense.fairy
-    }
-
+  constructor (defense) {
     this.defense = {
       normal: defense.normal === undefined ? 1 : defense.normal,
       fighting: defense.fighting === undefined ? 1 : defense.fighting,
@@ -44,33 +23,29 @@ export class PokemonType {
   }
 
   multiply (type) {
-    Object.keys(type.offense).map(key => {
-      this.offense[key] *= type.offense[key]
-    })
-    Object.keys(type.offense).map(key => {
+    Object.keys(type.defense).map(key => {
       this.defense[key] *= type.defense[key]
     })
   }
 }
 
 export const PokemonTypeDefaults = {
-  normal: new PokemonType({ rock: 0.5, steel: 0.5, ghost: 0 }, { fighting: 2, ghost: 0 }),
-  fighting: new PokemonType({ dark: 2, ice: 2, normal: 2, rock: 2, steel: 2, bug: 0.5, fairy: 0.5, flying: 0.5, poison: 0.5, psychic: 0.5 }, { bug: 0.5, dark: 0.5, rock: 0.5, fairy: 2, flying: 2, psychic: 2 }),
-  flying: new PokemonType({ bug: 2, fighting: 2, grass: 2, electric: 0.5, rock: 0.5, steel: 0.5 }, { bug: 0.5, fighting: 0.5, grass: 0.5, electric: 2, ice: 2, rock: 2, ground: 0 }),
-  poison: new PokemonType({ fairy: 2, grass: 2, poison: 0.5, ground: 0.5, rock: 0.5, ghost: 0.5, steel: 0 }, { fighting: 0.5, poison: 0.5, bug: 0.5, grass: 0.5, fairy: 0.5, ground: 2, psychic: 2 }),
-  ground: new PokemonType({ electric: 2, fire: 2, poison: 2, rock: 2, steel: 2, bug: 0.5, grass: 0.5, flying: 0 }, { poison: 0.5, rock: 0.5, grass: 2, ice: 2, water: 2, electric: 0 }),
-  rock: new PokemonType({ bug: 2, fire: 2, flying: 2, ice: 2, fighting: 0.5, ground: 0.5, steel: 0.5 }, { fire: 0.5, flying: 0.5, normal: 0.5, poison: 0.5, fighting: 2, grass: 2, ground: 2, steel: 2, water: 2 }),
-  bug: new PokemonType({ dark: 2, grass: 2, psychic: 2, fairy: 0.5, fighting: 0.5, fire: 0.5, flying: 0.5, ghost: 0.5, poison: 0.5, steel: 0.5 }, { fighting: 0.5, grass: 0.5, ground: 0.5, fire: 2, flying: 2, rock: 2 }),
-  ghost: new PokemonType({ ghost: 2, psychic: 2, dark: 0.5, normal: 0 }, { bug: 0.5, poison: 0.5, dark: 2, ghost: 2, normal: 0, fighting: 0 }),
-  steel: new PokemonType({ ice: 2, rock: 2, electric: 0.5, fire: 0.5, steel: 0.5, water: 0.5 }, { bug: 0.5, dark: 0.5, dragon: 0.5, flying: 0.5, ghost: 0.5, grass: 0.5, ice: 0.5, normal: 0.5, psychic: 0.5, rock: 0.5, steel: 0.5, fighting: 2, fire: 2, ground: 2, poison: 0 }),
-  fire: new PokemonType({ bug: 2, grass: 2, ice: 2, steel: 2, dragon: 0.5, fire: 0.5, rock: 0.5, water: 0.5 }, { bug: 0.5, fairy: 0.5, fire: 0.5, grass: 0.5, ice: 0.5, steel: 0.5, ground: 2, rock: 2, water: 2 }),
-  water: new PokemonType({ fire: 2, ground: 2, rock: 2, dragon: 0.5, grass: 0.5, water: 0.5 }, { fire: 0.5, ice: 0.5, steel: 0.5, water: 0.5, electric: 2, grass: 2 }),
-  grass: new PokemonType({ ground: 2, rock: 2, water: 2, bug: 0.5, dragon: 0.5, fire: 0.5, flying: 0.5, grass: 0.5, poison: 0.5, steel: 0.5 }, { electric: 0.5, grass: 0.5, ground: 0.5, bug: 2, fire: 2, flying: 2, ice: 2, poison: 2 }),
-  electric: new PokemonType({ flying: 2, water: 2, dragon: 0.5, electric: 0.5, grass: 0.5, ground: 0 }, { electric: 0.5, flying: 0.5, steel: 0.5, ground: 2 }),
-  psychic: new PokemonType({ fighting: 2, poison: 2, psychic: 0.5, steel: 0.5, dark: 0 }, { fighting: 0.5, psychic: 0.5, bug: 2, dark: 2, ghost: 2 }),
-  ice: new PokemonType({ dragon: 2, flying: 2, grass: 2, ground: 2, fire: 0.5, ice: 0.5, steel: 0.5, water: 0.5 }, { ice: 0.5, fighting: 2, fire: 2, rock: 2, steel: 2 }),
-  dragon: new PokemonType({ dragon: 2 }, { electric: 0.5, fire: 0.5, grass: 0.5, water: 0.5, dragon: 2, ice: 2 }),
-  dark: new PokemonType({ ghost: 2, psychic: 2, dark: 0.5, fairy: 0.5, fighting: 0.5 }, { dark: 0.5, ghost: 0.5, bug: 2, fairy: 2, fighting: 2, psychic: 0 }),
-  fairy: new PokemonType({ dark: 2, dragon: 2, fighting: 2, fire: 0.5, poison: 0.5, steel: 0.5 }, { bug: 0.5, dark: 0.5, fighting: 0.5, poison: 2, steel: 2, dragon: 0 })
-
+  normal: new PokemonType({ fighting: 2, ghost: 0 }),
+  fighting: new PokemonType({ bug: 0.5, dark: 0.5, rock: 0.5, fairy: 2, flying: 2, psychic: 2 }),
+  flying: new PokemonType({ bug: 0.5, fighting: 0.5, grass: 0.5, electric: 2, ice: 2, rock: 2, ground: 0 }),
+  poison: new PokemonType({ fighting: 0.5, poison: 0.5, bug: 0.5, grass: 0.5, fairy: 0.5, ground: 2, psychic: 2 }),
+  ground: new PokemonType({ poison: 0.5, rock: 0.5, grass: 2, ice: 2, water: 2, electric: 0 }),
+  rock: new PokemonType({ fire: 0.5, flying: 0.5, normal: 0.5, poison: 0.5, fighting: 2, grass: 2, ground: 2, steel: 2, water: 2 }),
+  bug: new PokemonType({ fighting: 0.5, grass: 0.5, ground: 0.5, fire: 2, flying: 2, rock: 2 }),
+  ghost: new PokemonType({ bug: 0.5, poison: 0.5, dark: 2, ghost: 2, normal: 0, fighting: 0 }),
+  steel: new PokemonType({ bug: 0.5, dark: 0.5, dragon: 0.5, flying: 0.5, ghost: 0.5, grass: 0.5, ice: 0.5, normal: 0.5, psychic: 0.5, rock: 0.5, steel: 0.5, fighting: 2, fire: 2, ground: 2, poison: 0 }),
+  fire: new PokemonType({ bug: 0.5, fairy: 0.5, fire: 0.5, grass: 0.5, ice: 0.5, steel: 0.5, ground: 2, rock: 2, water: 2 }),
+  water: new PokemonType({ fire: 0.5, ice: 0.5, steel: 0.5, water: 0.5, electric: 2, grass: 2 }),
+  grass: new PokemonType({ electric: 0.5, grass: 0.5, ground: 0.5, bug: 2, fire: 2, flying: 2, ice: 2, poison: 2 }),
+  electric: new PokemonType({ electric: 0.5, flying: 0.5, steel: 0.5, ground: 2 }),
+  psychic: new PokemonType({ fighting: 0.5, psychic: 0.5, bug: 2, dark: 2, ghost: 2 }),
+  ice: new PokemonType({ ice: 0.5, fighting: 2, fire: 2, rock: 2, steel: 2 }),
+  dragon: new PokemonType({ electric: 0.5, fire: 0.5, grass: 0.5, water: 0.5, dragon: 2, ice: 2 }),
+  dark: new PokemonType({ dark: 0.5, ghost: 0.5, bug: 2, fairy: 2, fighting: 2, psychic: 0 }),
+  fairy: new PokemonType({ bug: 0.5, dark: 0.5, fighting: 0.5, poison: 2, steel: 2, dragon: 0 })
 }
