@@ -2,22 +2,22 @@
   <div>
     <router-tabs active="POKEMON" />
     <div class="row">
-      <div class="card">
+      <div class="card col-12 pokemon-container">
         <b-img
-          class="card-img-top"
+          class="card-img-top mt-1"
           :src="$store.state.pokemonImageUrl"
           alt="Image not found"
         />
         <div class="card-body">
           <h5 class="card-title">
-            {{ $store.state.pokemon.name.toUpperCase() }}
+            {{ $store.getters.pokemon.name.toUpperCase() }}
           </h5>
           <p>
             {{ $store.state.pokemonDescription }}
           </p>
           <p>
             <type-badge
-              v-for="typeSlot in $store.state.pokemon.types"
+              v-for="typeSlot in $store.getters.pokemon.types"
               :key="typeSlot.type.name"
               :type-name="typeSlot.type.name"
             />

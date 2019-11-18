@@ -11,6 +11,9 @@ export default new Vuex.Store({
     pokemonEvolutionChain: null,
     pokemonImageUrl: ''
   },
+  getters: {
+    pokemon: state => state.pokemon ? state.pokemon : {}
+  },
   mutations: {
     updatePokemon (state, pokemon) {
       state.pokemon = pokemon
@@ -23,10 +26,17 @@ export default new Vuex.Store({
     },
     updatePokemonImageUrl (state, pokemonImageUrl) {
       state.pokemonImageUrl = pokemonImageUrl
+    },
+    reset (state) {
+      state.pokemon = {}
+      state.pokemonDescription = ''
+      state.pokemonEvolutionChain = {}
+      state.pokemonImageUrl = ''
     }
   },
   actions: {
     updatePokemon ({ commit }, payload) {
+      commit('reset')
       axios.get(payload.url)
         .then(response => {
           commit('updatePokemon', response.data)
