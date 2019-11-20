@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import router from '../router/index.js'
 
 Vue.use(Vuex)
 
@@ -36,12 +37,18 @@ export default new Vuex.Store({
   },
   actions: {
     updatePokemon ({ commit }, payload) {
+      router.push('/')
       commit('reset')
-      axios.get(payload.url)
-        .then(response => {
-          commit('updatePokemon', response.data)
-          commit('updatePokemonImageUrl', 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + response.data.id).substr(-3) + '.png')
-        })
+      if (payload.url) {
+        axios.get(payload.url)
+          .then(response => {
+            commit('updatePokemon', response.data)
+            commit('updatePokemonImageUrl', 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + response.data.id).substr(-3) + '.png')
+          })
+      } else {
+        commit('updatePokemon', payload)
+        commit('updatePokemonImageUrl', 'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/' + ('000' + payload.id).substr(-3) + '.png')
+      }
       axios.get('https://pokeapi.co/api/v2/pokemon-species/' + payload.name.toLowerCase())
         .then(response => {
           let description = ''
@@ -51,6 +58,7 @@ export default new Vuex.Store({
             }
           })
           commit('updatePokemonDescription', description)
+          router.push('/pokemon')
           axios.get(response.data.evolution_chain.url)
             .then(evolutionChainResponse => commit('updatePokemonEvolutionChain', evolutionChainResponse.data.chain))
         })

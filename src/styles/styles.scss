@@ -85,3 +85,10 @@ $typeTextColors: (
   right: 0
 }
 
+.sprite {
+  cursor: pointer;
+  &:hover {
+    background-color: lightblue;
+  }
+}
+
