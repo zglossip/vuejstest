@@ -59,7 +59,6 @@ export default {
   methods: {
     updatePokemonId: function (pokemon) {
       this.$store.dispatch('updatePokemon', pokemon)
-      this.$router.push('/pokemon')
     }
   }
 }
