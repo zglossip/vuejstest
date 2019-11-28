@@ -10,7 +10,7 @@
         />
         <div class="card-body">
           <h5 class="card-title">
-            {{ $store.getters.pokemon.name.toUpperCase() }}
+            <strong>#{{ $store.getters.pokemon.id }}</strong> {{ $store.getters.pokemon.name.toUpperCase() }}
           </h5>
           <p>
             {{ $store.state.pokemonDescription }}

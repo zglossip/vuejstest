@@ -4,7 +4,7 @@
     <div class="row">
       <div class="card pokemon-container pokemon-container-list col-12">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item list-group-item-info">
+          <li class="list-group-item list-group-item-primary">
             <h5>
               <strong>Immune to</strong>
               <type-badge
@@ -14,6 +14,22 @@
               />
               <b-badge
                 v-if="zeroXTypesDefense.length == 0"
+                pill
+              >
+                None
+              </b-badge>
+            </h5>
+          </li>
+          <li class="list-group-item list-group-item-info">
+            <h5>
+              <strong>Very strong against</strong>
+              <type-badge
+                v-for="typeName in quarterXTypesDefense"
+                :key="typeName + 'quarterXDefense'"
+                :type-name="typeName"
+              />
+              <b-badge
+                v-if="quarterXTypesDefense.length == 0"
                 pill
               >
                 None
@@ -103,6 +119,7 @@ export default {
       twoXTypesDefense: [],
       oneXTypesDefense: [],
       halfXTypesDefense: [],
+      quarterXTypesDefense: [],
       zeroXTypesDefense: []
     }
   },
@@ -122,6 +139,8 @@ export default {
         this.oneXTypesDefense.push(key)
       } else if (value === 0.5) {
         this.halfXTypesDefense.push(key)
+      } else if (value === 0.25) {
+        this.quarterXTypesDefense.push(key)
       } else {
         this.zeroXTypesDefense.push(key)
       }
