@@ -37,7 +37,7 @@
     "jsdom-global": "^3.0.2",
     "mocha": "^5.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "portal-vue": "^2.1.6",
     "sass-loader": "^8.0.0",
     "vue-loader": "^15.7.1",
